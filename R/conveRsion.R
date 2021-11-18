@@ -1,13 +1,6 @@
-#' Conversion between list of measures
-#'
-#' function converts from to to unit for a given categorz.
-#' It takes integer and returns integer.
-#'
-#' @param infile An Integer for from argument
-#' @return An integer for to argument
-#' @export
-#'
 
+# Author: Tomaz
+# Converts different units between categories
 
 .listOfMeasures = data.frame(category = character(0), unit = character(0), quotient = numeric(0))
 .listOfMeasures = rbind(.listOfMeasures,
@@ -22,21 +15,30 @@
 )
 ConversionListOfMeasures = lapply(split(.listOfMeasures$unit, .listOfMeasures$category, drop = TRUE), as.character)
 
+#' Conversion between list of measures
+#'
+#' function converts from to to unit for a given categorz.
+#' It takes integer and returns integer.
+#'
+#' @param infile An Integer for from argument
+#' @return An integer for to argument
+#' @export
+#'
 
 conveRsion = function(x, from, to){
   unit = quotient = NULL
-  if(nrow(subset(ConversionListOfMeasures,unit==from,category))==0) {
+  if(nrow(subset(.listOfMeasures,unit==from,category))==0) {
     stop('the \'from\' argument is false unit.')
   }
-  if(nrow(subset(ConversionListOfMeasures,unit==to,category))==0) {
+  if(nrow(subset(.listOfMeasures,unit==to,category))==0) {
     stop('the \'to\' argument is false unit.')
   }
-  if(subset(ConversionListOfMeasures,unit==from,category)!=subset(ConversionListOfMeasures,unit==to,category)) {
+  if(subset(.listOfMeasures,unit==from,category)!=subset(.listOfMeasures,unit==to,category)) {
     stop('these units are not in same category and cannot be converted.')
   }
 
-  value = x / subset(ConversionListOfMeasures, unit == from, quotient, drop = TRUE)
-  print(value)
-  value2 = value * subset(ConversionListOfMeasures, unit == to, quotient, drop = TRUE)
+  value = x / subset(.listOfMeasures, unit == from, quotient, drop = TRUE)
+  #print(value)
+  value2 = value * subset(.listOfMeasures, unit == to, quotient, drop = TRUE)
   return(value2)
 }
