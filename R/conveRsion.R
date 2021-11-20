@@ -13,7 +13,6 @@
                         data.frame(category = 'time', unit = 'mon', quotient = 1/(86400*365.25/12)),
                         data.frame(category = 'time', unit = 'year', quotient = 1/(86400*365.25))
 )
-ConversionListOfMeasures = lapply(split(.listOfMeasures$unit, .listOfMeasures$category, drop = TRUE), as.character)
 
 #' Conversion between list of measures
 #'

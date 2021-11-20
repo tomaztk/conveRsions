@@ -2,4 +2,3 @@
 
 export(conveRsion)
 export(fahrenheit_to_kelvin)
-export(new_Date)
